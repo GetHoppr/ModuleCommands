@@ -1,0 +1,11 @@
+<?php declare(strict_types=1);
+
+use Illuminate\Support\Facades\Route;
+
+Route::get('/', List{{moduleName}}Controller::class)->name('list.{{name}}');
+Route::get('/create', Create{{moduleName}}Controller::class)->name('create.{{name}}');
+Route::post('/', Store{{moduleName}}Controller::class)->name('store.{{name}}');
+Route::get('/{id}', Show{{moduleName}}Controller::class)->name('show.{{name}}');
+Route::get('/{id}/edit', Edit{{moduleName}}Controller::class)->name('edit.{{name}}');
+Route::put('/{id}', Update{{moduleName}}Controller::class)->name('update.{{name}}');
+Route::delete('/{id}', Destroy{{moduleName}}Controller::class)->name('delete.{{name}}');
