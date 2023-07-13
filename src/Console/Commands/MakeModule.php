@@ -23,8 +23,8 @@ class MakeModule extends Command
     {
         $this->scaffoldFolders(path: $this->getPath(''));
         $this->resolveServiceProvider();
-        // $this->makeConfig();
-        // $this->makeRoutes();
+        $this->makeConfig();
+        $this->makeRoutes();
 
         return self::SUCCESS;
     }
@@ -46,7 +46,7 @@ class MakeModule extends Command
             '--module' => $this->getModuleName(),
             'name' => $this->getModuleName().'ServiceProvider',
             'ns' => 'Providers',
-            'stub' => 'module.service-provider.stub',
+            'stub' => '../../stubs/module.service-provider.stub',
             'tokens' => [
                 '{{config}}' => strtolower($this->getModuleName()),
             ],
@@ -59,7 +59,7 @@ class MakeModule extends Command
             '--module' => $this->getModuleName(),
             'name' => 'RouteServiceProvider',
             'ns' => 'Providers',
-            'stub' => 'module.route-service-provider.stub',
+            'stub' => '../../stubs/module.route-service-provider.stub',
             'tokens' => [
                 '{{module}}' => strtolower($this->getModuleName()),
                 '{{prefix}}' => strtolower($this->getModuleName()),
@@ -68,47 +68,52 @@ class MakeModule extends Command
         ]);
     }
 
-    // public function makeConfig(): void
-    // {
-    //     $this->info('Create config...');
-    //     $this->call('module:resolve-stubs', [
-    //         'moduleName' => $this->getModuleName(),
-    //         'name' => 'config',
-    //         'ns' => '',
-    //         'stub' => 'module.config.stub',
-    //         'tokens' => [
-    //             '{{moduleName}}' => $this->getModuleName(),
-    //             '{{name}}' => strtolower($this->getModuleName()),
-    //         ]
-    //     ]);
-    // }
+    public function resolveModuleName(): string
+    {
+        return $this->argument('moduleName');
+    }
 
-    // private function makeRoutes(): void
-    // {
-    //     $this->info('Create web routes...');
-    //     $this->call('module:resolve-stubs', [
-    //         'moduleName' => $this->getModuleName(),
-    //         'name' => 'web.route',
-    //         'ns' => '',
-    //         'stub' => 'module.routes.stub',
-    //         'tokens' => [
-    //             '{{name}}' => strtolower($this->getModuleName()),
-    //             '{{moduleName}}' => $this->getModuleName(),
-    //         ]
-    //     ]);
+    public function makeConfig(): void
+    {
+        $this->info('Create config...');
+        $this->call('module:resolve-stubs', [
+            '--module' => $this->getModuleName(),
+            'name' => 'config',
+            'ns' => '',
+            'stub' => '../../stubs/module.config.stub',
+            'tokens' => [
+                '{{moduleName}}' => $this->getModuleName(),
+                '{{name}}' => strtolower($this->getModuleName()),
+            ]
+        ]);
+    }
 
-    //     $this->info('Create api routes...');
-    //     $this->call('module:resolve-stubs', [
-    //         'moduleName' => $this->getModuleName(),
-    //         'name' => 'api.route',
-    //         'ns' => '',
-    //         'stub' => 'module.routes.stub',
-    //         'tokens' => [
-    //             '{{name}}' => strtolower($this->getModuleName()),
-    //             '{{moduleName}}' => $this->getModuleName(),
-    //         ]
-    //     ]);
-    // }
+    private function makeRoutes(): void
+    {
+        $this->info('Create web routes...');
+        $this->call('module:resolve-stubs', [
+            '--module' => $this->getModuleName(),
+            'name' => 'web.route',
+            'ns' => '',
+            'stub' => '../../stubs/module.routes.stub',
+            'tokens' => [
+                '{{name}}' => strtolower($this->getModuleName()),
+                '{{moduleName}}' => $this->getModuleName(),
+            ]
+        ]);
+
+        $this->info('Create api routes...');
+        $this->call('module:resolve-stubs', [
+            '--module' => $this->getModuleName(),
+            'name' => 'api.route',
+            'ns' => '',
+            'stub' => '../../stubs/module.routes.stub',
+            'tokens' => [
+                '{{name}}' => strtolower($this->getModuleName()),
+                '{{moduleName}}' => $this->getModuleName(),
+            ]
+        ]);
+    }
 
     protected function resolveArguments(): array
     {

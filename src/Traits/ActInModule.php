@@ -8,14 +8,15 @@ use Illuminate\Support\Str;
 
 trait ActInModule
 {
-    public function getModuleName(string $name = null): string
-    {
-        // $args = $this->arguments();
-        // $name = array_key_exists('moduleName', $args) ? $args['moduleName'] : null;
 
-        dd($this->option('module'));
-        // return 'HELLO';
-        return Str::studly($name ?? $this->argument('moduleName') ?? $this->option('module'));
+    public function resolveModuleName(): string
+    {
+        return $this->option('module');
+    }
+
+    protected function getModuleName(): string
+    {
+        return Str::studly($this->resolveModuleName());
     }
 
     protected function getPath($name)

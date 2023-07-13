@@ -19,7 +19,8 @@ class ModuleCommandsServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/../config/module-commands.php' => config_path('module-commands.php'),
-        ], 'config');
+            __DIR__.'/../stubs/module.service-provider.stub' => base_path('stubs'),
+        ], 'module-command');
     }
 
     public function register()
