@@ -3,7 +3,8 @@
 namespace GetHoppr\ModuleCommands;
 
 use Illuminate\Support\ServiceProvider;
-use GetHoppr\ModuleCommands\Conole\Commands\MakeModule;
+use GetHoppr\ModuleCommands\Console\Commands\MakeModule;
+use GetHoppr\ModuleCommands\Console\Commands\ResolveModuleStubs;
 
 class ModuleCommandsServiceProvider extends ServiceProvider
 {
@@ -12,6 +13,7 @@ class ModuleCommandsServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 MakeModule::class,
+                ResolveModuleStubs::class,
             ]);
         }
 

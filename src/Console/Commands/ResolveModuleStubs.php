@@ -1,17 +1,16 @@
 <?php
 
-namespace App\Console\Commands;
+namespace GetHoppr\ModuleCommands\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Console\GeneratorCommand;
 use GetHoppr\ModuleCommands\Traits\ActInModule;
-use App\Console\Commands\Module\GeneratesModule;
-use App\Console\Commands\Module\Traits\InModule;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
+use GetHoppr\ModuleCommands\Contracts\GeneratesModule;
 
-class ResolveModuleStubs extends Command implements GeneratesModule
+class ResolveModuleStubs extends GeneratorCommand implements GeneratesModule
 {
-
     use ActInModule;
 
     protected $name = 'module:resolve-stubs';
@@ -37,7 +36,7 @@ class ResolveModuleStubs extends Command implements GeneratesModule
         return 'stubs/' . $this->argument('stub');
     }
 
-    public function getArguments(): array
+    public function resolveArguments(): array
     {
         return [
             ['name', InputArgument::REQUIRED, 'The name of the file'],
@@ -47,10 +46,10 @@ class ResolveModuleStubs extends Command implements GeneratesModule
         ];
     }
 
-    public function getOptions(): array
+    public function resolveOptions(): array
     {
         return [
-            ['module', InputOption::VALUE_REQUIRED, 'Name of the module']
+            ['module',  '', InputOption::VALUE_REQUIRED, 'Name of the module']
         ];
     }
 

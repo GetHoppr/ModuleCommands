@@ -8,9 +8,14 @@ use Symfony\Component\Console\Input\InputArgument;
 trait ActInModule
 {
 
-    public function getModuleName(): string
+    public function getModuleName(?string $name = null): string
     {
-        return Str::studly($this->argument('moduleName'));
+        // $args = $this->arguments();
+        // $name = array_key_exists('moduleName', $args) ? $args['moduleName'] : null;
+
+        dd ($this->option('module'));
+        // return 'HELLO';
+        return Str::studly($name ?? $this->argument('moduleName') ?? $this->option('module'));
     }
 
     protected function getPath($name)
@@ -70,6 +75,11 @@ trait ActInModule
         return [];
     }
 
+    public function resolveOptions(): array
+    {
+        return [];
+    }
+
     protected function getArguments()
     {
         return [
@@ -79,7 +89,11 @@ trait ActInModule
 
     protected function getOptions()
     {
-        return [];
+        return [
+            ...$this->resolveOptions()
+        ];
     }
+
+
 
 }
