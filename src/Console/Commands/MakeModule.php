@@ -1,10 +1,12 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace GetHoppr\ModuleCommands\Console\Commands;
 
+use GetHoppr\ModuleCommands\Traits\ActInModule;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Process;
-use GetHoppr\ModuleCommands\Traits\ActInModule;
 use Symfony\Component\Console\Input\InputArgument;
 
 class MakeModule extends Command
@@ -33,7 +35,7 @@ class MakeModule extends Command
         Process::run("mkdir -p $path");
 
         collect(config('module-commands.structure'))
-            ->each(fn($folder) => Process::run("mkdir -p $path/$folder"));
+            ->each(fn ($folder) => Process::run("mkdir -p $path/$folder"));
     }
 
     private function resolveServiceProvider(): void
@@ -42,16 +44,16 @@ class MakeModule extends Command
 
         $this->call('module:resolve-stubs', [
             '--module' => $this->getModuleName(),
-            'name' => $this->getModuleName() . 'ServiceProvider',
+            'name' => $this->getModuleName().'ServiceProvider',
             'ns' => 'Providers',
             'stub' => 'module.service-provider.stub',
             'tokens' => [
                 '{{config}}' => strtolower($this->getModuleName()),
-            ]
+            ],
         ]);
 
         $this->info('Create route service provider...');
-        $routeNS = config('modules.rootNS').'\\'. $this->getModuleName()."\Http\Controllers";
+        $routeNS = config('modules.rootNS').'\\'.$this->getModuleName()."\Http\Controllers";
 
         $this->call('module:resolve-stubs', [
             '--module' => $this->getModuleName(),
@@ -62,7 +64,7 @@ class MakeModule extends Command
                 '{{module}}' => strtolower($this->getModuleName()),
                 '{{prefix}}' => strtolower($this->getModuleName()),
                 '{{routeNS}}' => $routeNS,
-            ]
+            ],
         ]);
     }
 
@@ -114,8 +116,4 @@ class MakeModule extends Command
             ['moduleName', InputArgument::REQUIRED, 'The name of the module'],
         ];
     }
-
 }
-
-
-

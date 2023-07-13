@@ -2,9 +2,9 @@
 
 namespace GetHoppr\ModuleCommands;
 
-use Illuminate\Support\ServiceProvider;
 use GetHoppr\ModuleCommands\Console\Commands\MakeModule;
 use GetHoppr\ModuleCommands\Console\Commands\ResolveModuleStubs;
+use Illuminate\Support\ServiceProvider;
 
 class ModuleCommandsServiceProvider extends ServiceProvider
 {

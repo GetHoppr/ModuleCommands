@@ -2,9 +2,9 @@
 
 namespace GetHoppr\ModuleCommands\Tests;
 
+use GetHoppr\ModuleCommands\ModuleCommandsServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use GetHoppr\ModuleCommands\ModuleCommandsServiceProvider;
 
 class TestCase extends Orchestra
 {

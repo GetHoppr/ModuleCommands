@@ -3,7 +3,7 @@
 // config for GetHoppr/ModuleCommands
 
 return [
-    "path" => [
+    'path' => [
         'root' => '/src',
         'stubs' => 'stubs',
     ],
@@ -30,6 +30,6 @@ return [
         'Services/Events',
         'Services/Jobs',
         'Services/Listeners',
-        'Tests'
+        'Tests',
     ],
 ];

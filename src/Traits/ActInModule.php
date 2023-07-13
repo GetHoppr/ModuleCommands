@@ -1,29 +1,30 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace GetHoppr\ModuleCommands\Traits;
 
 use Illuminate\Support\Str;
-use Symfony\Component\Console\Input\InputArgument;
 
 trait ActInModule
 {
-
-    public function getModuleName(?string $name = null): string
+    public function getModuleName(string $name = null): string
     {
         // $args = $this->arguments();
         // $name = array_key_exists('moduleName', $args) ? $args['moduleName'] : null;
 
-        dd ($this->option('module'));
+        dd($this->option('module'));
         // return 'HELLO';
         return Str::studly($name ?? $this->argument('moduleName') ?? $this->option('module'));
     }
 
     protected function getPath($name)
     {
-        $moduleRootPath = base_path( config('module-commands.path.root') .'/'. $this->getModuleName() );
-        if ($name !== '')  {
+        $moduleRootPath = base_path(config('module-commands.path.root').'/'.$this->getModuleName());
+        if ($name !== '') {
             $name = str_replace('\\', '/', Str::replaceFirst($this->rootNamespace(), '', $name)).'.php';
-            return $moduleRootPath .'/'. $name;
+
+            return $moduleRootPath.'/'.$name;
         }
 
         return $moduleRootPath;
@@ -31,19 +32,19 @@ trait ActInModule
 
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace.'\\' .$this->resolveNamespace();
+        return $rootNamespace.'\\'.$this->resolveNamespace();
     }
 
     protected function rootNamespace()
     {
         $root = config('module-commands.namespace');
 
-        return "$root\\" . $this->getModuleName();
+        return "$root\\".$this->getModuleName();
     }
 
     protected function getStub()
     {
-        return $this->resolveStubPath('/' . $this->resolveStub());
+        return $this->resolveStubPath('/'.$this->resolveStub());
     }
 
     protected function resolveStubPath($stub)
@@ -63,7 +64,7 @@ trait ActInModule
 
     protected function replaceTokens(string $stub, array $tokens)
     {
-        foreach($tokens as $find => $replace) {
+        foreach ($tokens as $find => $replace) {
             $stub = str_replace($find, $replace, $stub);
         }
 
@@ -83,17 +84,14 @@ trait ActInModule
     protected function getArguments()
     {
         return [
-            ...$this->resolveArguments()
+            ...$this->resolveArguments(),
         ];
     }
 
     protected function getOptions()
     {
         return [
-            ...$this->resolveOptions()
+            ...$this->resolveOptions(),
         ];
     }
-
-
-
 }
