@@ -84,7 +84,7 @@ class MakeModule extends Command
             'tokens' => [
                 '{{moduleName}}' => $this->getModuleName(),
                 '{{name}}' => strtolower($this->getModuleName()),
-            ]
+            ],
         ]);
     }
 
@@ -99,7 +99,7 @@ class MakeModule extends Command
             'tokens' => [
                 '{{name}}' => strtolower($this->getModuleName()),
                 '{{moduleName}}' => $this->getModuleName(),
-            ]
+            ],
         ]);
 
         $this->info('Create api routes...');
@@ -111,7 +111,7 @@ class MakeModule extends Command
             'tokens' => [
                 '{{name}}' => strtolower($this->getModuleName()),
                 '{{moduleName}}' => $this->getModuleName(),
-            ]
+            ],
         ]);
     }
 

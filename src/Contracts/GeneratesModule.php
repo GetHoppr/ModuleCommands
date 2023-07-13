@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace GetHoppr\ModuleCommands\Contracts;
 
-interface GeneratesModule {
-
+interface GeneratesModule
+{
     public function resolveModuleName(): string;
+
     public function resolveNamespace(): string;
 
     public function resolveArguments(): array;

@@ -2,11 +2,11 @@
 
 namespace GetHoppr\ModuleCommands\Console\Commands;
 
-use Illuminate\Console\GeneratorCommand;
-use GetHoppr\ModuleCommands\Traits\ActInModule;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
 use GetHoppr\ModuleCommands\Contracts\GeneratesModule;
+use GetHoppr\ModuleCommands\Traits\ActInModule;
+use Illuminate\Console\GeneratorCommand;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 class ResolveModuleStubs extends GeneratorCommand implements GeneratesModule
 {
@@ -32,7 +32,7 @@ class ResolveModuleStubs extends GeneratorCommand implements GeneratesModule
 
     public function resolveStub(): string
     {
-        return  $this->argument('stub');
+        return $this->argument('stub');
     }
 
     public function resolveArguments(): array

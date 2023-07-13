@@ -8,7 +8,6 @@ use Illuminate\Support\Str;
 
 trait ActInModule
 {
-
     public function resolveModuleName(): string
     {
         return $this->option('module');
